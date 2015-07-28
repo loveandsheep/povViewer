@@ -4,6 +4,8 @@
 void ofApp::setup(){
 	dotstar.setup(87);
 	receiver.setup(12400);
+	ofSetVerticalSync(false);
+	ofSetFrameRate(400);
 }
 
 //--------------------------------------------------------------
@@ -18,10 +20,12 @@ void ofApp::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
-		if (m.getAddress() == "/led/set")
-		{
-			buf = m.getArgAsBlob(0);
-			sigLength = m.getArgAsInt32(1);
+		if (!receiver.hasWaitingMessages()){
+			if (m.getAddress() == "/led/set")
+			{
+				buf = m.getArgAsBlob(0);
+				sigLength = m.getArgAsInt32(1);
+			}
 		}
 		
 		
@@ -30,16 +34,18 @@ void ofApp::update(){
 	if (sigLength > 0)
 	{
 		vector<char> bytes;
+		bytes.assign(87, 0x00);
+		
+		int cnt = 0;
 		char byte = 0x00;
 		for (int i = 0;i < buf.size();i++)
 		{
 			if (i % 2 == 0) byte = buf.getBinaryBuffer()[i];
 			if (i % 2 == 1)
 			{
-				for (int j = 0;j < (int)(unsigned char)(buf.getBinaryBuffer()[i]);j++)
-				{
-					bytes.push_back(byte);
-				}
+				int byteNum = (int)(unsigned char)(buf.getBinaryBuffer()[i]);
+				memset(&bytes[cnt], byteNum, byte);
+				cnt += byteNum;
 			}
 		}
 		
@@ -49,11 +55,6 @@ void ofApp::update(){
 							 bytes[i],
 							 bytes[i + numPix],
 							 bytes[i + numPix * 2]);
-		}
-	}else{
-		for (int i = 0;i < 87;i++){
-			dotstar.setColor(i,
-							 50,50,50);
 		}
 	}
 	
