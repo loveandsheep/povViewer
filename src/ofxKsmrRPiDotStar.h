@@ -23,7 +23,7 @@ public:
 	
 	void setSignals(char* sig, int numByte);
 	
-protected:
+//protected:
 	
 	vector<unsigned char> signal;
 	vector<unsigned char> senderSig;

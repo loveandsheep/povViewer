@@ -36,7 +36,7 @@ void ofApp::update(){
 			if (i % 2 == 0) byte = buf.getBinaryBuffer()[i];
 			if (i % 2 == 1)
 			{
-				for (int j = 0;j < (int)(buf.getBinaryBuffer()[i]);j++)
+				for (int j = 0;j < (int)(unsigned char)(buf.getBinaryBuffer()[i]);j++)
 				{
 					bytes.push_back(byte);
 				}
@@ -57,7 +57,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
 }
 
 //--------------------------------------------------------------
