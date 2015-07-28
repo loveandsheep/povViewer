@@ -9,18 +9,40 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	
+	ofBuffer buf;
+	int sigLength = -1;
+	
 	while (receiver.hasWaitingMessages())
 	{
+		
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
 		if (m.getAddress() == "/led/set")
 		{
-			ofBuffer buf = m.getArgAsBlob(0);
-			dotstar.setSignals(buf.getBinaryBuffer(), m.getArgAsInt32(1));
+			buf = m.getArgAsBlob(0);
+			sigLength = m.getArgAsInt32(1);
 		}
 		
 		
+	}
+	
+	if (sigLength > 0)
+	{
+		vector<char> bytes;
+		char byte = 0x00;
+		for (int i = 0;i < buf.size();i++)
+		{
+			if (i % 2 == 0) byte = buf.getBinaryBuffer()[i];
+			if (i % 2 == 1)
+			{
+				for (int j = 0;j < (int)(buf.getBinaryBuffer()[i]);j++)
+				{
+					bytes.push_back(byte);
+				}
+			}
+		}
+		dotstar.setSignals(&bytes[0], sigLength);
 	}
 	
 	dotstar.show();
