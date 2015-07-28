@@ -44,7 +44,7 @@ void ofApp::update(){
 			if (i % 2 == 1)
 			{
 				int byteNum = (int)(unsigned char)(buf.getBinaryBuffer()[i]);
-				memset(&bytes[cnt], byteNum, byte);
+				memset(&bytes[cnt], byte, byteNum);
 				cnt += byteNum;
 			}
 		}
