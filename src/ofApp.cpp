@@ -50,6 +50,11 @@ void ofApp::update(){
 							 bytes[i + numPix],
 							 bytes[i + numPix * 2]);
 		}
+	}else{
+		for (int i = 0;i < 87;i++){
+			dotstar.setColor(i,
+							 50,50,50);
+		}
 	}
 	
 	dotstar.show();
