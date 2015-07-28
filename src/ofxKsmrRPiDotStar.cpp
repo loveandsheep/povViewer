@@ -36,6 +36,12 @@ void ofxKsmrRPiDotStar::setup(int numLED)
 
 }
 
+void ofxKsmrRPiDotStar::setSignals(char *sig, int numByte)
+{
+	numByte = ofClamp(numByte, 0, signal.size());
+	memcpy(&signal[0], sig, numByte);
+}
+
 void ofxKsmrRPiDotStar::setColor(int channel, ofColor color)
 {
 	int targByte = 4 + channel * 4;

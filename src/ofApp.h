@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxKsmrRPiDotStar.h"
+#include "ofxOsc.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,4 +22,5 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 	
 	ofxKsmrRPiDotStar dotstar;
+	ofxOscReceiver receiver;
 };

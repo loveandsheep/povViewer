@@ -21,6 +21,8 @@ public:
 	void setColor(int channel, int r, int g, int b);
 	void show();
 	
+	void setSignals(char* sig, int numByte);
+	
 protected:
 	
 	vector<unsigned char> signal;

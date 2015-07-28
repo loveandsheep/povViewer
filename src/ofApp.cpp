@@ -3,12 +3,24 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	dotstar.setup(60);
+	receiver.setup(12400);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	for (int i = 0;i < 60;i++){
-		dotstar.setColor(i, 255 * (ofGetFrameNum() % 60 == i), 0, 0);
+	
+	while (receiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+		
+		if (m.getAddress() == "/led/set")
+		{
+			ofBuffer buf = m.getArgAsBlob(0);
+			dotstar.setSignals(buf.getBinaryBuffer(), m.getArgAsInt32(1));
+		}
+		
+		
 	}
 	
 	dotstar.show();
