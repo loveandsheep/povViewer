@@ -22,7 +22,7 @@ void ofxKsmrRPiDotStar::setup(int numLED)
 		setColor(i, 0, 0, 0);
 	
 #ifndef TARGET_OSX
-	int speed = 100000;
+	int speed = 10000000;
 	
 	if ((wiringPiSPISetup (SPI_CHANNEL, speed)) < 0) {
 		printf("wiringPiSPISetup error \n");
