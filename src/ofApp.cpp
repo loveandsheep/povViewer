@@ -56,6 +56,13 @@ void ofApp::update(){
 		}
 	}
 	
+	for (int i = 0;i < NUMLED;i++){
+		if (ofGetFrameNum() % 2 == 0)
+			dotstar.setColor(i, 255,255,255);
+		else
+			dotstar.setColor(i, 0,0,0);
+	}
+	
 	dotstar.show();
 }
 
