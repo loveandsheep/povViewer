@@ -34,7 +34,7 @@ void ofApp::update(){
 	if (sigLength > 0)
 	{
 		vector<char> bytes;
-		bytes.assign(87, 0x00);
+		bytes.assign(87 * 3, 0x00);
 		
 		int cnt = 0;
 		char byte = 0x00;
