@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	dotstar.setup(60);
+	dotstar.setup(87);
 	receiver.setup(12400);
 }
 
