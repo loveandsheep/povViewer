@@ -4,6 +4,8 @@
 #include "ofxKsmrRPiDotStar.h"
 #include "ofxOsc.h"
 
+#define NUMLED 87
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -23,4 +25,6 @@ class ofApp : public ofBaseApp{
 	
 	ofxKsmrRPiDotStar dotstar;
 	ofxOscReceiver receiver;
+	
+	unsigned char bytes[NUMLED * 3];
 };

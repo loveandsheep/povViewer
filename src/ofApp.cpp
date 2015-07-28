@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	dotstar.setup(87);
+	dotstar.setup(NUMLED);
 	receiver.setup(12400);
 	ofSetVerticalSync(false);
 	ofSetFrameRate(400);
@@ -33,9 +33,6 @@ void ofApp::update(){
 	
 	if (sigLength > 0)
 	{
-		vector<char> bytes;
-		bytes.assign(87 * 3, 0x00);
-		
 		int cnt = 0;
 		char byte = 0x00;
 		for (int i = 0;i < buf.size();i++)
@@ -44,12 +41,13 @@ void ofApp::update(){
 			if (i % 2 == 1)
 			{
 				int byteNum = (int)(unsigned char)(buf.getBinaryBuffer()[i]);
-				memset(&bytes[cnt], byte, byteNum);
+				memset(&bytes[cnt], (int)(unsigned char)byte, byteNum);
+				
 				cnt += byteNum;
 			}
 		}
 		
-		int numPix = bytes.size()/3;
+		int numPix = NUMLED;
 		for (int i = 0;i < numPix;i++){
 			dotstar.setColor(i,
 							 bytes[i],
