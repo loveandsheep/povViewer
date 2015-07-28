@@ -42,7 +42,14 @@ void ofApp::update(){
 				}
 			}
 		}
-		dotstar.setSignals(&bytes[0], sigLength);
+		
+		int numPix = bytes.size()/3;
+		for (int i = 0;i < numPix;i++){
+			dotstar.setColor(i,
+							 bytes[i],
+							 bytes[i + numPix],
+							 bytes[i + numPix * 2]);
+		}
 	}
 	
 	dotstar.show();
