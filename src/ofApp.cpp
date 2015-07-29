@@ -5,7 +5,7 @@ void ofApp::setup(){
 	dotstar.setup(NUMLED);
 	receiver.setup(12400);
 	ofSetVerticalSync(false);
-	ofSetFrameRate(60);
+	ofSetFrameRate(200);
 }
 
 //--------------------------------------------------------------
